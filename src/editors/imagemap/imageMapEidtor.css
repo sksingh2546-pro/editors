@@ -1,0 +1,13 @@
+.rde-editor-footer-toolbar-preview {
+    bottom: 30px !important;
+}
+
+.rde-editor-footer-toolbar-preview1 {
+    position: absolute;
+    display: block;
+    bottom: 30px;
+    left: 130px;
+    height: 40px;
+    width:55%;
+    border-radius: 12px;
+}
