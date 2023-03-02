@@ -1,7 +1,6 @@
 import { fabric } from 'fabric';
-import { duration } from 'html2canvas/dist/types/css/property-descriptors/duration';
 import { FabricElement, toObject } from '../utils';
-let clearsTimeout:any;
+let clearsTimeout: any;
 export interface Code {
 	animation: string;
 	data: string;
@@ -40,15 +39,24 @@ const Playlist = fabric.util.createClass(fabric.Rect, {
 			code,
 		});
 		const { id } = this;
-		const {animation,data}=code;
+		const { animation, data } = code;
 		document.getElementById(`${id}_player`).innerHTML = '';
+		const directionOption = ["slideRightReturn", "slideLeftReturn", "slideUpReturn", "swashIn",
+			"spaceInDown", "spaceInUp", "spaceInLeft", "spaceInRight",
+			"boingInUp", "foolishIn", "tinRightIn", "tinLeftIn",
+			"tinUpIn", "tinDownIn", "perspectiveDownReturn", "perspectiveUpReturn",
+			"perspectiveLeftReturn", "perspectiveRightReturn", "openDownLeftReturn",
+			"openDownRightReturn", "openUpLeftReturn", "openUpRightReturn", "puffIn",
+			"vanishIn", "twisterInDown", "twisterInUp", "swap",];
+
 		clearTimeout(clearsTimeout);
+		let animation1 = "";
 		setTimeout(() => {
 			let dataLength = JSON.parse(data);
 			let div = document.getElementById(`${id}_player`);
 			let slideIndex = 0;
-			div.innerHTML='';
-		    let durations: any[] = [];
+			div.innerHTML = '';
+			let durations: any[] = [];
 			for (var key in dataLength) {
 				if (dataLength[key].data.includes('.mp4')) {
 					durations.push(dataLength[key].duration);
@@ -66,27 +74,32 @@ const Playlist = fabric.util.createClass(fabric.Rect, {
 					div.appendChild(oImg);
 				}
 			}
-			console.log(durations);
 			setTimeout(() => {
 				showSlides();
 
 				function showSlides() {
 					
+					if (animation === "random") {
+						const random = Math.floor(Math.random() * directionOption.length);
+						animation1 = directionOption[random];
+					}
+					else {
+						animation1 = animation;
+					}
 					let i;
 					let slides = document.getElementsByClassName(`${id}_player`);
 					for (i = 0; i < slides.length; i++) {
-						slides[i].classList.remove("slideRightReturn")
-						slides[i].classList.remove("slideLeftReturn")
-						slides[i].classList.remove("slideUpReturn")
-						slides[i].classList.remove("swashIn")
-						slides[i].classList.remove("spaceInDown")
+
+						slides[i].classList.remove(animation1)
 						slides[i].classList.add('holeOut')
 					}
 					slideIndex++;
 					if (slideIndex > slides.length) { slideIndex = 1 }
-					    slides[slideIndex-1].classList.remove('holeOut')
-						slides[slideIndex - 1].classList.add(animation)
-						clearsTimeout=setTimeout(showSlides, (durations[slideIndex - 1] * 1000));
+					slides[slideIndex - 1].classList.remove('holeOut')
+					slides[slideIndex - 1].classList.add(animation1)
+					clearsTimeout = setTimeout(showSlides,
+
+						(durations[slideIndex - 1] * 1000));
 
 
 				}
@@ -104,7 +117,7 @@ const Playlist = fabric.util.createClass(fabric.Rect, {
 		this.callSuper('_render', ctx);
 		if (!this.element) {
 			debugger
-			const { id, scaleX, scaleY, width, height, angle, editable,code } = this;
+			const { id, scaleX, scaleY, width, height, angle, editable, code } = this;
 			console.log(code)
 			const zoom = this.canvas.getZoom();
 			const left = this.calcCoords().tl.x;
@@ -120,7 +133,10 @@ const Playlist = fabric.util.createClass(fabric.Rect, {
                         top: ${top + padTop}px;
                         position: absolute;
                         user-select: ${editable ? 'none' : 'auto'};
-                        pointer-events: ${editable ? 'none' : 'auto'};`,
+                        pointer-events: ${editable ? 'none' : 'auto'};
+						overflow:hidden;
+						`
+				,
 			}) as HTMLDivElement;
 			this.styleEl = document.createElement('style');
 			this.styleEl.id = `${id}_style`;
@@ -3276,39 +3292,10 @@ const Playlist = fabric.util.createClass(fabric.Rect, {
 			}
 			
 			.img1{
-				left:0;object-fit:contain;top:0;width:100%;height:100%;z-index:100;position:absolute;
+				left:0;object-fit:contain;top:0;width:100%;height:100%;z-index:1;position:absolute;
 			}
-
-			
-#slider {
-	overflow: hidden;
-}
-
-@keyframes slider {
-	0% { left: 0; }
-	30% { left: 0; }
-	33% { left: -100%; }
-	63% { left: -100%; }
-	66% { left: -200%; }
-	95% { left: -200%; }
-	100% { left: 0; }
-}
-#slider figure {
-	width:300%;
-	position: relative;
-	animation: 9s slider infinite;
-}
-
-#slider figure:hover {
-	/*animation-play-state: paused; enable for pause on hover*/
-}
-#slider figure img {
-	width: 33.333333333%;
-	height : 100%;
-	float: left;
-}
 			`
-            const {animation,data}=code;
+			const { animation, data } = code;
 			this.element.innerHTML = `<div class="page-1" id=${id}_player>
 			</div>`;
 			document.head.appendChild(this.styleEl);
@@ -3321,53 +3308,53 @@ const Playlist = fabric.util.createClass(fabric.Rect, {
 			const container = document.getElementById(this.container);
 			container.appendChild(this.element);
 			document.getElementById(`${id}_player`).innerHTML = '';
-		let slideIndex = 0;
-		let durations: any[] = [];
-		setTimeout(() => {
-			let dataLength = JSON.parse(data);
-			let div = document.getElementById(`${id}_player`);
-			for (var key in dataLength) {
-				if (dataLength[key].data.includes('.mp4')) {
-					durations.push(dataLength[key].duration);
-					var oImg = document.createElement("video");
-					oImg.setAttribute('src', dataLength[key].data);
-					oImg.setAttribute("autoplay", "true");
-					oImg.setAttribute('class', `magictime holeOut img1 ${id}_player`);
-					div.appendChild(oImg);
-				}
-				else {
-					durations.push(dataLength[key].duration);
-					var oImg = document.createElement("img");
-					oImg.setAttribute('src', dataLength[key].data);
-					oImg.setAttribute('class', `magictime holeOut img1 ${id}_player`);
-					div.appendChild(oImg);
-				}
-			}
-
+			let slideIndex = 0;
+			let durations: any[] = [];
 			setTimeout(() => {
-				showSlides();
-
-				function showSlides() {
-					let i;
-					let slides = document.getElementsByClassName(`${id}_player`);
-					for (i = 0; i < slides.length; i++) {
-						slides[i].classList.remove("slideRightReturn")
-						slides[i].classList.remove("slideLeftReturn")
-						slides[i].classList.remove("slideUpReturn")
-						slides[i].classList.remove("swashIn")
-						slides[i].classList.remove("spaceInDown")
-						slides[i].classList.add('holeOut')
+				let dataLength = JSON.parse(data);
+				let div = document.getElementById(`${id}_player`);
+				for (var key in dataLength) {
+					if (dataLength[key].data.includes('.mp4')) {
+						durations.push(dataLength[key].duration);
+						var oImg = document.createElement("video");
+						oImg.setAttribute('src', dataLength[key].data);
+						oImg.setAttribute("autoplay", "true");
+						oImg.setAttribute('class', `magictime holeOut img1 ${id}_player`);
+						div.appendChild(oImg);
 					}
-					slideIndex++;
-					if (slideIndex > slides.length) { slideIndex = 1 }
-						slides[slideIndex - 1].classList.add(animation)
-						clearsTimeout=setTimeout(showSlides, (durations[slideIndex - 1] * 1000));
-
-
+					else {
+						durations.push(dataLength[key].duration);
+						var oImg = document.createElement("img");
+						oImg.setAttribute('src', dataLength[key].data);
+						oImg.setAttribute('class', `magictime holeOut img1 ${id}_player`);
+						div.appendChild(oImg);
+					}
 				}
+
+				setTimeout(() => {
+					showSlides();
+
+					function showSlides() {
+						let i;
+						let slides = document.getElementsByClassName(`${id}_player`);
+						for (i = 0; i < slides.length; i++) {
+							slides[i].classList.remove("slideRightReturn")
+							slides[i].classList.remove("slideLeftReturn")
+							slides[i].classList.remove("slideUpReturn")
+							slides[i].classList.remove("swashIn")
+							slides[i].classList.remove("spaceInDown")
+							slides[i].classList.add('holeOut')
+						}
+						slideIndex++;
+						if (slideIndex > slides.length) { slideIndex = 1 }
+						slides[slideIndex - 1].classList.add(animation)
+						clearsTimeout = setTimeout(showSlides, (durations[slideIndex - 1] * 1000));
+
+
+					}
+				});
 			});
-		});
-			
+
 		}
 	},
 });

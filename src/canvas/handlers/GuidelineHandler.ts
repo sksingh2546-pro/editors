@@ -13,7 +13,7 @@ class GuidelineHandler {
 	aligningLineMargin = 4;
 	aligningLineWidth = 1;
 	aligningLineColor = 'rgb(255, 0, 0)';
-	zoom = 0.7;
+	zoom = 0.6;
 
 	constructor(handler: Handler) {
 		this.handler = handler;
@@ -43,7 +43,7 @@ class GuidelineHandler {
 		this.aligningLineWidth = 1;
 		this.aligningLineColor = 'rgb(255, 0, 0)';
 		this.viewportTransform = this.handler.canvas.viewportTransform;
-		this.zoom = 0.7;
+		this.zoom = 0.6;
 		this.verticalLines = [];
 		this.horizontalLines = [];
 	}
@@ -126,6 +126,8 @@ class GuidelineHandler {
 		}
 		return false;
 	};
+
+	
 
 	movingGuidelines = (target: FabricObject) => {
 		const canvasObjects = this.handler.canvas.getObjects() as FabricObject[];
@@ -359,6 +361,82 @@ class GuidelineHandler {
 					'center',
 				);
 			}
+
+
+            // snap by the bottom right edge
+			if (this.isInRange(objectTop + objectHeight / 2, activeObjectTop - activeObjectHeight / 2)) {
+				horizontalInTheRange = true;
+				if (canvasObjects[i].id === 'workarea') {
+					const workarea = canvasObjects[i] as WorkareaObject;
+					const x1 = -5000;
+					const x2 = 5000;
+					let y = objectTop + objectHeight / 2;
+					if (workarea.layout === 'fullscreen') {
+						y = this.handler.canvas.getHeight();
+					}
+					this.horizontalLines.push({
+						y,
+						x1,
+						x2,
+					});
+				} else {
+					this.horizontalLines.push({
+						y: objectTop + objectHeight / 2,
+						x1:
+							objectLeft < activeObjectLeft
+								? objectLeft - objectWidth / 2 - this.aligningLineOffset
+								: objectLeft + objectWidth / 2 + this.aligningLineOffset,
+						x2:
+							activeObjectLeft > objectLeft
+								? activeObjectLeft + activeObjectWidth / 2 + this.aligningLineOffset
+								: activeObjectLeft - activeObjectWidth / 2 - this.aligningLineOffset,
+					});
+				}
+				target.setPositionByOrigin(
+					new fabric.Point(activeObjectLeft, objectTop + objectHeight / 2 + activeObjectHeight / 2),
+					'center',
+					'center',
+				);
+			}
+
+             // snap by the bottom top left edge
+			if (this.isInRange(objectTop - objectHeight / 2, activeObjectTop + activeObjectHeight / 2)) {
+				horizontalInTheRange = true;
+				if (canvasObjects[i].id === 'workarea') {
+					const workarea = canvasObjects[i] as WorkareaObject;
+					const x1 = -5000;
+					const x2 = 5000;
+					let y = objectTop - objectHeight / 2;
+					if (workarea.layout === 'fullscreen') {
+						y = 0;
+					}
+					this.horizontalLines.push({
+						y,
+						x1,
+						x2,
+					});
+				} else {
+					this.horizontalLines.push({
+						y: objectTop - objectHeight / 2,
+						x1:
+							objectLeft < activeObjectLeft
+								? objectLeft - objectWidth / 2 - this.aligningLineOffset
+								: objectLeft + objectWidth / 2 + this.aligningLineOffset,
+						x2:
+							activeObjectLeft > objectLeft
+								? activeObjectLeft + activeObjectWidth / 2 + this.aligningLineOffset
+								: activeObjectLeft - activeObjectWidth / 2 - this.aligningLineOffset,
+					});
+				}
+				target.setPositionByOrigin(
+					new fabric.Point(activeObjectLeft, objectTop - objectHeight / 2 - activeObjectHeight / 2),
+					'center',
+					'center',
+				);
+			}
+
+
+			
 		}
 
 		if (!horizontalInTheRange) {

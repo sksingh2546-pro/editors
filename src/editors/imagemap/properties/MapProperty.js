@@ -22,8 +22,19 @@ export default {
 						initialValue: data.name || "Design Editor",
 					})(<Input  />)}
 				</Form.Item>
-				{layout === 'fixed' ? (
+				
 					<React.Fragment>
+						<Form.Item label={i18n.t('common.layout')} colon={false}>
+					{getFieldDecorator('layout', {
+						initialValue: layout,
+					})(
+						<Radio.Group size="small">
+							<Radio.Button value="fixed">1920*1080</Radio.Button>
+							<Radio.Button value="responsive">1080*1920</Radio.Button>
+							<Radio.Button value="fullscreen">3840*2160</Radio.Button>
+						</Radio.Group>,
+					)}
+				</Form.Item>
 						<Row>
 							<Col span={12}>
 								<Form.Item label={i18n.t('common.width')} colon={false}>
@@ -57,7 +68,7 @@ export default {
 							</Col>
 						</Row>
 					</React.Fragment>
-				) : null}
+				
 			</React.Fragment>
 		);
 	},

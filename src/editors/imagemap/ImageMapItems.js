@@ -28,7 +28,7 @@ class ImageMapItems extends Component {
 		textSearch: '',
 		descriptors: {},
 		filteredDescriptors: [],
-		svgModalVisible: false,
+		svgModalVisible: true,
 	};
 
 	componentDidMount() {
@@ -56,9 +56,11 @@ class ImageMapItems extends Component {
 			return true;
 		} else if (JSON.stringify(this.state.activeKey) !== JSON.stringify(nextState.activeKey)) {
 			return true;
-		} else if (this.state.collapse !== nextState.collapse) {
+		}
+		else if (this.state.collapse !== nextState.collapse) {
 			return true;
-		} else if (this.state.svgModalVisible !== nextState.svgModalVisible) {
+		}
+		else if (this.state.svgModalVisible !== nextState.svgModalVisible) {
 			return true;
 		}
 		return false;
@@ -305,7 +307,8 @@ class ImageMapItems extends Component {
 									<Collapse
 										style={{ width: '100%' }}
 										bordered={false}
-										activeKey={activeKey.length ? activeKey : Object.keys(descriptors)}
+										accordion
+										// activeKey={activeKey.length ? activeKey : Object.keys(descriptors)}
 										onChange={this.handlers.onChangeActiveKey}
 									>
 										{Object.keys(descriptors).map(key => (

@@ -87,6 +87,7 @@ class WorkflowItems extends Component<IProps> {
 			});
 		},
 		onCollapse: () => {
+			console.log(this.state.collapse)
 			this.setState({
 				collapse: !this.state.collapse,
 			});

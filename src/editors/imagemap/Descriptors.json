@@ -1,81 +1,4 @@
 {
-	
-	"DUCUMENTS": [
-		{
-			"name": "Add Document",
-			"description": "",
-			"type": "iframe",
-			"icon": {
-				"prefix": "fas",
-				"name": "file"
-			},
-			"option": {
-				"superType": "element",
-				"type": "iframe",
-				"width": 1920,
-				"height": 1080,
-				"name": "iframe"
-			}
-		}
-	],
-
-	"MARKER": [
-		{
-			"name": "Marker",
-			"description": "",
-			"type": "marker",
-			"icon": {
-				"prefix": "fas",
-				"name": "map-marker-alt"
-			},
-			"option": {
-				"type": "i-text",
-				"text": "\uf3c5",
-				"fontFamily": "Font Awesome 5 Free",
-				"fontWeight": 900,
-				"fontSize": 60,
-				"width": 30,
-				"height": 30,
-				"editable": false,
-				"name": "New marker"
-			}
-		}
-	],
-	"TEXT": [
-		{
-			"name": "Text",
-			"description": "",
-			"type": "text",
-			"icon": {
-				"prefix": "fas",
-				"name": "font"
-			},
-			"option": {
-				"type": "textbox",
-				"text": "",
-				"width": 60,
-				"height": 30,
-				"fontSize": 32,
-				"name": "New text"
-			}
-		},
-		{
-			"name": "Scrolling Text",
-			"description": "",
-			"type": "element",
-			"icon": {
-				"prefix": "fas",
-				"name": "text-width"
-			},
-			"option": {
-				"superType": "element",
-				"type": "ticker",
-				"width": 1920,
-				"height": 60,
-				"name": "ticker"
-			}
-		}
-	],
 	"MEDIA": [
 		{
 			"name": "Image",
@@ -127,6 +50,130 @@
 			}
 		}
 	],
+	"DUCUMENTS": [
+		{
+			"name": "PDF",
+			"description": "",
+			"type": "iframe",
+			"icon": {
+				"prefix": "fas",
+				"name": "file"
+			},
+			"option": {
+				"superType": "element",
+				"type": "iframe",
+				"width": 1920,
+				"height": 1080,
+				"name": "iframe"
+			}
+		}
+	],
+	"TEXT": [
+		{
+			"name": "Text",
+			"description": "",
+			"type": "text",
+			"icon": {
+				"prefix": "fas",
+				"name": "font"
+			},
+			"option": {
+				"type": "textbox",
+				"text": "",
+				"width": 60,
+				"height": 30,
+				"fontSize": 32,
+				"name": "New text"
+			}
+		},
+		{
+			"name": "Scrolling Text",
+			"description": "",
+			"type": "element",
+			"icon": {
+				"prefix": "fas",
+				"name": "text-width"
+			},
+			"option": {
+				"superType": "element",
+				"type": "ticker",
+				"width": 1920,
+				"height": 60,
+				"name": "ticker"
+			}
+		}
+	],
+	"PLUGIN": [
+		{
+			"name": "Weather",
+			"description": "",
+			"type": "iframe",
+			"icon": {
+				"prefix": "fas",
+				"name": "cloud"
+			},
+			"option": {
+				"superType": "element",
+				"type": "weather",
+				"width": 700,
+				"height": 700,
+				"name": "weather"
+			}
+		},
+		{
+			"name": "Clock",
+			"description": "",
+			"type": "iframe",
+			"icon": {
+				"prefix": "fas",
+				"name": "clock"
+			},
+			"option": {
+				"superType": "element",
+				"type": "clock",
+				"width": 700,
+				"height": 700,
+				"name": "clock"
+			}
+		},
+		{
+			"name": "Rating",
+			"description": "",
+			"type": "iframe",
+			"icon": {
+				"prefix": "fas",
+				"name": "star-half-alt"
+			},
+			"option": {
+				"superType": "element",
+				"type": "rating",
+				"width": 1920,
+				"height": 1080,
+				"name": "ratings"
+			}
+		}
+	],
+	"ELEMENT": [
+		{
+			"name": "Element",
+			"description": "",
+			"type": "element",
+			"icon": {
+				"prefix": "fab",
+				"name": "html5"
+			},
+			"option": {
+				"superType": "element",
+				"type": "element",
+				"width": 480,
+				"height": 270,
+				"name": "New element"
+			}
+		}
+	],
+	
+	
+	
 	"SHAPE": [
 		{
 			"name": "Triangle",
@@ -191,53 +238,25 @@
 			}
 		}
 	],
-	"PLUGIN": [
+	"MARKER": [
 		{
-			"name": "Weather",
+			"name": "Marker",
 			"description": "",
-			"type": "iframe",
+			"type": "marker",
 			"icon": {
 				"prefix": "fas",
-				"name": "cloud"
+				"name": "map-marker-alt"
 			},
 			"option": {
-				"superType": "element",
-				"type": "weather",
-				"width": 700,
-				"height": 700,
-				"name": "weather"
-			}
-		},
-		{
-			"name": "Clock",
-			"description": "",
-			"type": "iframe",
-			"icon": {
-				"prefix": "fas",
-				"name": "clock"
-			},
-			"option": {
-				"superType": "element",
-				"type": "clock",
-				"width": 700,
-				"height": 700,
-				"name": "clock"
-			}
-		},
-		{
-			"name": "Rating",
-			"description": "",
-			"type": "iframe",
-			"icon": {
-				"prefix": "fas",
-				"name": "star-half-alt"
-			},
-			"option": {
-				"superType": "element",
-				"type": "rating",
-				"width": 1920,
-				"height": 1080,
-				"name": "ratings"
+				"type": "i-text",
+				"text": "\uf3c5",
+				"fontFamily": "Font Awesome 5 Free",
+				"fontWeight": 900,
+				"fontSize": 60,
+				"width": 30,
+				"height": 30,
+				"editable": false,
+				"name": "New marker"
 			}
 		}
 	],
@@ -281,23 +300,6 @@
 				"name": "New arrow"
 			}
 		}
-	],
-	"ELEMENT": [
-		{
-			"name": "Element",
-			"description": "",
-			"type": "element",
-			"icon": {
-				"prefix": "fab",
-				"name": "html5"
-			},
-			"option": {
-				"superType": "element",
-				"type": "element",
-				"width": 480,
-				"height": 270,
-				"name": "New element"
-			}
-		}
 	]
+	
 }

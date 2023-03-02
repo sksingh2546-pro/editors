@@ -47,6 +47,46 @@ class ZoomHandler {
 		this.handler.canvas.requestRenderAll();
 	};
 
+	public zoomToPoint1 = (point: fabric.Point, zoom: number,layout:string) => {
+		debugger
+		const { minZoom, maxZoom } = this.handler;
+		let zoomRatio = zoom;
+		if (zoom <= minZoom / 100) {
+			zoomRatio = minZoom / 100;
+		} else if (zoom >= maxZoom / 100) {
+			zoomRatio = maxZoom / 100;
+		}
+
+		if(layout==="responsive"){
+			zoomRatio=0.35;
+		}
+		else if(layout==="fixed"){
+			zoomRatio=0.6
+		}
+		else if(layout==="fullscreen"){
+			zoomRatio=0.3
+		}
+		point=new fabric.Point(680, 350);
+		this.handler.canvas.zoomToPoint(point, zoomRatio);
+		this.handler.getObjects().forEach(obj => {
+			if (obj.superType === 'element') {
+				const { id, width, height, player } = obj as VideoObject;
+				const el = this.handler.elementHandler.findById(id);
+				// update the element
+				this.handler.elementHandler.setScaleOrAngle(el, obj);
+				this.handler.elementHandler.setSize(el, obj);
+				this.handler.elementHandler.setPosition(el, obj);
+				if (player) {
+					player.setPlayerSize(width, height);
+				}
+			}
+		});
+		if (this.handler.onZoom) {
+			this.handler.onZoom(zoomRatio);
+		}
+		this.handler.canvas.requestRenderAll();
+	};
+
 	/**
 	 * Zoom one to one
 	 *
@@ -113,7 +153,7 @@ class ZoomHandler {
 
 
 	public zoomDefault = () => {
-		let zoomRatio = 0.7
+		let zoomRatio = 0.6
 		this.zoomToPoint(new fabric.Point(760, 350), zoomRatio);
 	};
 

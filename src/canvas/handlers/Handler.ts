@@ -280,7 +280,7 @@ class Handler implements HandlerOptions {
 	public objects: FabricObject[];
 	public activeLine?: any;
 	public activeShape?: any;
-	public zoom = 0.7;
+	public zoom = 0.6;
 	public prevTarget?: FabricObject;
 	public target?: FabricObject;
 	public pointArray?: any[];

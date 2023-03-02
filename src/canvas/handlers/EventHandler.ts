@@ -182,6 +182,7 @@ class EventHandler {
 					const top = target.top + obj.top + target.height / 2;
 					if (obj.superType === 'node') {
 						this.handler.portHandler.setCoords({ ...obj, left, top });
+						this.handler.guidelineHandler.movingGuidelines(target);
 					} else if (obj.superType === 'element') {
 						const { id } = obj;
 						const el = this.handler.elementHandler.findById(id);

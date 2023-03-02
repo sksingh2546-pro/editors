@@ -110,7 +110,13 @@ class TickerEditor extends Component {
             this.setState({data:JSON.stringify(newArray)});
             this.props.onOk();
         }
-        const directionOption = [{value:"slideRightReturn",label:"Slide Right"}, {value:"slideLeftReturn",label:"Slide Left"}, {value:"slideUpReturn",label:"Slide Up"}, {value:"swashIn",label:"Swash In"}, {value:"spaceInDown",label:"Space In"}];
+        const directionOption = [{value:"slideRightReturn",label:"Slide Right"}, {value:"slideLeftReturn",label:"Slide Left"}, {value:"slideUpReturn",label:"Slide Up"}, {value:"swashIn",label:"Swash In"}, 
+        {value:"spaceInDown",label:"Space In Down"},{value:"spaceInUp",label:"Space In Up"},{value:"spaceInLeft",label:" Space In Left"},{value:"spaceInRight",label:"Space In Right"},
+        {value:"boingInUp",label:"Boing In"},{value:"foolishIn",label:"Foolish In"},{value:"tinRightIn",label:"Tin Right"},{value:"tinLeftIn",label:"Tin Left"},
+        {value:"tinUpIn",label:"Tin Up"},{value:"tinDownIn",label:"Tin Down"},{value:"perspectiveDownReturn",label:"Perspective Down"},{value:"perspectiveUpReturn",label:"Perspective Up"},
+        {value:"perspectiveLeftReturn",label:"Perspective Left"},{value:"perspectiveRightReturn",label:"Perspective Right"},{value:"openDownLeftReturn",label:"Open Down Left"},
+        {value:"openDownRightReturn",label:"Open Down Right"},{value:"openUpLeftReturn",label:"Open Up Left"},{value:"openUpRightReturn",label:"Open Up Right"},{value:"puffIn",label:"Puff In"},
+        {value:"vanishIn",label:"Vanish In"},{value:"twisterInDown",label:"Twister In Down"},{value:"twisterInUp",label:"Twister In Up"}, {value:"swap",label:"Swap"},{value:"random",label:"Random Slide"}];
 
         return (
             <React.Fragment>

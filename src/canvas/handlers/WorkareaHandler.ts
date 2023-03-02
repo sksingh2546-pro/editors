@@ -35,6 +35,7 @@ class WorkareaHandler {
 	 * @returns
 	 */
 	public setLayout = (layout: WorkareaLayout) => {
+		debugger;
 		this.handler.workarea.set('layout', layout);
 		const { _element, isElement, workareaWidth, workareaHeight } = this.handler.workarea;
 		const { canvas } = this.handler;
@@ -84,8 +85,9 @@ class WorkareaHandler {
 				this.handler.zoomHandler.zoomToPoint(new fabric.Point(center.left, center.top), scaleX);
 			} else {
 				this.handler.workarea.set({
-					width: workareaWidth,
-					height: workareaHeight,
+					width: workareaHeight,
+					height: workareaWidth,
+					
 				});
 				scaleX = canvas.getWidth() / workareaWidth;
 				scaleY = canvas.getHeight() / workareaHeight;
@@ -94,7 +96,32 @@ class WorkareaHandler {
 				} else {
 					scaleY = scaleX;
 				}
+				this.handler.zoomHandler.zoomToPoint1(new fabric.Point(center.left, center.top), scaleX,layout);
+			}
+			canvas.centerObject(this.handler.workarea);
+			canvas.renderAll();
+			return;
+		}
+		if (isFullscreen) {
+			const center = canvas.getCenter();
+			if (isElement) {
+				this.handler.workarea.set({
+					scaleX: 1,
+					scaleY: 1,
+				});
 				this.handler.zoomHandler.zoomToPoint(new fabric.Point(center.left, center.top), scaleX);
+			} else {
+				this.handler.workarea.set({
+					width: 3840,
+					height: 2160,
+					
+				});
+				scaleX = canvas.getWidth() / 3840;
+				scaleY = canvas.getHeight() / 2160;
+				
+					scaleY = scaleX;
+			
+				this.handler.zoomHandler.zoomToPoint1(new fabric.Point(center.left, center.top), scaleX,layout);
 			}
 			canvas.centerObject(this.handler.workarea);
 			canvas.renderAll();
@@ -129,7 +156,7 @@ class WorkareaHandler {
 		const center = canvas.getCenter();
 		canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
 		debugger 
-		this.handler.zoomHandler.zoomToPoint(new fabric.Point(center.left, center.top), 1);
+		this.handler.zoomHandler.zoomToPoint1(new fabric.Point(center.left, center.top), 1,layout);
 		canvas.renderAll();
 	};
 

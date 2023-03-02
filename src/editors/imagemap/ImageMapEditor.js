@@ -78,7 +78,7 @@ const defaultOption = {
 class ImageMapEditor extends Component {
 	state = {
 		selectedItem: null,
-		zoomRatio: 0.7,
+		zoomRatio: 0.6,
 		preview: false,
 		loading: false,
 		progress: 0,
